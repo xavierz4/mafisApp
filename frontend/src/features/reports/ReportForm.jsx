@@ -49,19 +49,19 @@ export default function ReportForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-semibold text-gray-900 mb-6">Nuevo Reporte de Falla</h1>
+    <div className="asset-form-container">
+      <h1 className="asset-form-header">Nuevo Reporte de Falla</h1>
       
-      <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">
-        <div>
-          <label htmlFor="asset_id" className="block text-sm font-medium text-gray-700">Activo Afectado</label>
+      <form onSubmit={handleSubmit} className="asset-form-card">
+        <div className="asset-form-group">
+          <label htmlFor="asset_id" className="asset-form-label">Activo Afectado</label>
           <select
             name="asset_id"
             id="asset_id"
             required
             value={formData.asset_id}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm"
+            className="input"
           >
             <option value="">Seleccione un activo</option>
             {assets.map(asset => (
@@ -72,8 +72,8 @@ export default function ReportForm() {
           </select>
         </div>
 
-        <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">Descripción del Problema</label>
+        <div className="asset-form-group">
+          <label htmlFor="description" className="asset-form-label">Descripción del Problema</label>
           <textarea
             name="description"
             id="description"
@@ -81,19 +81,19 @@ export default function ReportForm() {
             rows={4}
             value={formData.description}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm"
+            className="input"
             placeholder="Describa detalladamente la falla observada..."
           />
         </div>
 
-        <div>
-          <label htmlFor="priority" className="block text-sm font-medium text-gray-700">Prioridad Percibida</label>
+        <div className="asset-form-group">
+          <label htmlFor="priority" className="asset-form-label">Prioridad Percibida</label>
           <select
             name="priority"
             id="priority"
             value={formData.priority}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm"
+            className="input"
           >
             <option value="LOW">Baja - No afecta operación</option>
             <option value="MEDIUM">Media - Afecta parcialmente</option>
@@ -102,18 +102,18 @@ export default function ReportForm() {
           </select>
         </div>
 
-        <div className="flex justify-end space-x-3">
+        <div className="asset-form-actions">
           <button
             type="button"
             onClick={() => navigate('/dashboard/reports')}
-            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+            className="btn btn-secondary"
           >
             Cancelar
           </button>
           <button
             type="submit"
             disabled={isLoading}
-            className="inline-flex justify-center rounded-md border border-transparent bg-secondary py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 disabled:opacity-50"
+            className="btn btn-primary"
           >
             {isLoading ? 'Enviando...' : 'Enviar Reporte'}
           </button>

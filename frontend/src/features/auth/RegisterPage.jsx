@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import useAuthStore from './store';
 import toast from 'react-hot-toast';
 
@@ -11,6 +12,7 @@ export default function RegisterPage() {
     phone: '',
     role: 'requester' // Default role
   });
+  const [showPassword, setShowPassword] = useState(false);
   const { register, isLoading } = useAuthStore();
   const navigate = useNavigate();
 
@@ -30,98 +32,114 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+    <div className="login-gradient">
+      <div className="login-content-wrapper">
+        <div className="login-brand-header">
+          <div className="brand-circle">
+            SENA
+          </div>
+          <h1 className="login-title-main">
+            MAFIS
+          </h1>
+          <p className="login-subtitle-main">
+            Sistema de Gestión de Mantenimiento de Activos Fijos
+          </p>
+          <p className="login-subtitle-secondary">
+            Servicio Nacional de Aprendizaje
+          </p>
+          <h2 className="login-section-title">
             Crear una cuenta nueva
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            O{' '}
-            <Link to="/login" className="font-medium text-secondary hover:text-blue-500">
-              inicia sesión si ya tienes cuenta
-            </Link>
-          </p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="name" className="sr-only">Nombre</label>
+
+        <div className="login-card">
+          <form className="login-form" onSubmit={handleSubmit}>
+            <div className="login-form-group">
+              <label htmlFor="name" className="login-label">Nombre</label>
               <input
                 id="name"
                 name="name"
                 type="text"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
+                className="input"
                 placeholder="Nombre Completo"
                 value={formData.name}
                 onChange={handleChange}
               />
             </div>
-            <div>
-              <label htmlFor="email-address" className="sr-only">Email</label>
+            <div className="login-form-group">
+              <label htmlFor="email-address" className="login-label">Correo electrónico</label>
               <input
                 id="email-address"
                 name="email"
                 type="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
-                placeholder="Email"
+                className="input"
+                placeholder="Correo electrónico"
                 value={formData.email}
                 onChange={handleChange}
               />
             </div>
-            <div>
-              <label htmlFor="phone" className="sr-only">Teléfono</label>
+            <div className="login-form-group">
+              <label htmlFor="phone" className="login-label">Teléfono</label>
               <input
                 id="phone"
                 name="phone"
                 type="tel"
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
+                className="input"
                 placeholder="Teléfono (para WhatsApp)"
                 value={formData.phone}
                 onChange={handleChange}
               />
             </div>
-            <div>
-              <label htmlFor="password" className="sr-only">Contraseña</label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-secondary focus:border-secondary focus:z-10 sm:text-sm"
-                placeholder="Contraseña"
-                value={formData.password}
-                onChange={handleChange}
-              />
+            <div className="login-form-group">
+              <label htmlFor="password" className="login-label">Contraseña</label>
+              <div className="password-input-wrapper">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  required
+                  className="input"
+                  placeholder="Contraseña"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <button
+                  type="button"
+                  className="password-toggle-btn"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <EyeSlashIcon className="icon-sm" />
+                  ) : (
+                    <EyeIcon className="icon-sm" />
+                  )}
+                </button>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Rol (Demo)</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm rounded-md"
-            >
-              <option value="requester">Solicitante</option>
-              <option value="technician">Técnico</option>
-              <option value="admin">Administrador</option>
-            </select>
-          </div>
 
-          <div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-secondary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:opacity-50"
-            >
-              {isLoading ? 'Registrando...' : 'Registrarse'}
-            </button>
+
+            <div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="btn btn-primary login-submit-btn"
+                style={{ backgroundColor: 'var(--primary-blue)', borderColor: 'var(--primary-blue)' }}
+              >
+                {isLoading ? 'Registrando...' : 'Registrarse'}
+              </button>
+            </div>
+          </form>
+
+          <div className="login-footer-links">
+            <span style={{ color: '#6b7280' }}>¿Ya tienes cuenta?</span>
+            <Link to="/login" className="login-footer-link">
+              Iniciar sesión
+            </Link>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

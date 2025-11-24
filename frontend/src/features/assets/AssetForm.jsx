@@ -65,14 +65,14 @@ export default function AssetForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-semibold text-gray-900 mb-6">
+    <div className="asset-form-container">
+      <h1 className="asset-form-header">
         {isEditing ? 'Editar Activo' : 'Nuevo Activo'}
       </h1>
       
-      <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre</label>
+      <form onSubmit={handleSubmit} className="asset-form-card">
+        <div className="asset-form-group">
+          <label htmlFor="name" className="asset-form-label">Nombre</label>
           <input
             type="text"
             name="name"
@@ -80,31 +80,31 @@ export default function AssetForm() {
             required
             value={formData.name}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm"
+            className="input"
           />
         </div>
 
-        <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">Descripción</label>
+        <div className="asset-form-group">
+          <label htmlFor="description" className="asset-form-label">Descripción</label>
           <textarea
             name="description"
             id="description"
             rows={3}
             value={formData.description}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm"
+            className="input"
           />
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <div>
-            <label htmlFor="type" className="block text-sm font-medium text-gray-700">Tipo</label>
+        <div className="asset-form-row">
+          <div className="asset-form-group">
+            <label htmlFor="type" className="asset-form-label">Tipo</label>
             <select
               name="type"
               id="type"
               value={formData.type}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm"
+              className="input"
             >
               <option value="EQUIPMENT">Equipo</option>
               <option value="LOCATIVE">Locativo</option>
@@ -112,26 +112,26 @@ export default function AssetForm() {
             </select>
           </div>
 
-          <div>
-            <label htmlFor="location" className="block text-sm font-medium text-gray-700">Ubicación</label>
+          <div className="asset-form-group">
+            <label htmlFor="location" className="asset-form-label">Ubicación</label>
             <input
               type="text"
               name="location"
               id="location"
               value={formData.location}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm"
+              className="input"
             />
           </div>
 
-          <div>
-            <label htmlFor="status" className="block text-sm font-medium text-gray-700">Estado</label>
+          <div className="asset-form-group">
+            <label htmlFor="status" className="asset-form-label">Estado</label>
             <select
               name="status"
               id="status"
               value={formData.status}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm"
+              className="input"
             >
               <option value="OPERATIONAL">Operativo</option>
               <option value="DOWN">Fuera de Servicio</option>
@@ -139,14 +139,14 @@ export default function AssetForm() {
             </select>
           </div>
 
-          <div>
-            <label htmlFor="criticality" className="block text-sm font-medium text-gray-700">Criticidad</label>
+          <div className="asset-form-group">
+            <label htmlFor="criticality" className="asset-form-label">Criticidad</label>
             <select
               name="criticality"
               id="criticality"
               value={formData.criticality}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-secondary focus:ring-secondary sm:text-sm"
+              className="input"
             >
               <option value="LOW">Baja</option>
               <option value="MEDIUM">Media</option>
@@ -155,18 +155,18 @@ export default function AssetForm() {
           </div>
         </div>
 
-        <div className="flex justify-end space-x-3">
+        <div className="asset-form-actions">
           <button
             type="button"
             onClick={() => navigate('/dashboard/assets')}
-            className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+            className="btn btn-secondary"
           >
             Cancelar
           </button>
           <button
             type="submit"
             disabled={isLoading}
-            className="inline-flex justify-center rounded-md border border-transparent bg-secondary py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 disabled:opacity-50"
+            className="btn btn-primary"
           >
             {isLoading ? 'Guardando...' : 'Guardar'}
           </button>

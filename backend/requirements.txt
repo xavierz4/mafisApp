@@ -9,3 +9,4 @@ cryptography
 pydantic
 email-validator
 gunicorn
+bcrypt
