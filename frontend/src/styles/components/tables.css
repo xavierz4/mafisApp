@@ -1,0 +1,393 @@
+/* ============================================
+   TABLES & RESPONSIVE CARDS
+   ============================================ */
+
+/* Desktop Table Styles */
+.table-container {
+  background-color: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Search Bar */
+.search-bar {
+  display: none;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-lg);
+}
+
+.page-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE - CARDS
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Mobile background */
+  .dashboard-content {
+    background-color: #f5f5f5 !important;
+  }
+
+  /* Page header on mobile */
+  .page-header {
+    background-color: white;
+    margin: -1rem -1rem 0 -1rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .page-subtitle {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+  }
+
+  /* Hide "Nuevo Activo" button on mobile */
+  .btn-primary {
+    display: none !important;
+  }
+
+  /* Search bar */
+  .search-bar {
+    display: flex;
+    background-color: white;
+    border-radius: 12px;
+    padding: 0.875rem 1rem;
+    margin: 1.5rem 0;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .search-bar input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 0.9375rem;
+    color: #374151;
+    background: transparent;
+  }
+
+  .search-bar input::placeholder {
+    color: #9ca3af;
+  }
+
+  .search-icon {
+    width: 20px;
+    height: 20px;
+    color: #9ca3af;
+    flex-shrink: 0;
+  }
+
+  /* Table to cards */
+  .table-container {
+    background-color: transparent;
+    box-shadow: none;
+    overflow: visible;
+    border: none;
+  }
+
+  table {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody {
+    display: block;
+  }
+
+  tr {
+    display: block;
+    margin-bottom: 1.25rem;
+    background-color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    position: relative;
+  }
+
+  tr:last-child {
+    margin-bottom: 5rem;
+  }
+
+  td {
+    display: block;
+    padding: 0;
+    border-bottom: none;
+  }
+
+  /* Asset name and badge layout */
+  td[data-label="Nombre"] {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  /* Show badge on mobile */
+  td[data-label="Nombre"] .mobile-badge {
+    flex-shrink: 0;
+  }
+
+  td[data-label="Nombre"] .badge {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  /* Hide Estado column on mobile */
+  td[data-label="Estado"]:not(.mobile-badge) {
+    display: none !important;
+  }
+
+  /* Location and type row */
+  td[data-label="Ubicación"],
+  td[data-label="Tipo"] {
+    display: inline;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+
+  td[data-label="Ubicación"]::after {
+    content: ' • ';
+    margin: 0 0.25rem;
+  }
+
+  td[data-label="Tipo"]::before,
+  td[data-label="Estado"]::before {
+    display: none;
+  }
+
+  /* Hide duplicate estado */
+  td[data-label="Estado"]:not([style*="display: none"]) {
+    display: none !important;
+  }
+
+  /* Actions menu */
+  td[data-label="Acciones"] {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .actions-cell {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+    gap: 0.75rem;
+  }
+
+  /* Hide desktop buttons on mobile */
+  .action-btn-desktop {
+    display: none !important;
+  }
+
+  /* Show mobile kebab menu */
+  .action-btn-mobile {
+    display: flex !important;
+  }
+
+  .action-btn {
+    padding: 0.5rem;
+  }
+
+  .kebab-menu {
+    color: #9ca3af;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+  }
+
+  .kebab-menu:hover {
+    background-color: #f3f4f6;
+    color: #6b7280;
+  }
+
+  .kebab-menu:active {
+    background-color: #e5e7eb;
+  }
+
+  /* Kebab menu container */
+  .kebab-menu-container {
+    position: relative;
+  }
+
+  /* Dropdown menu */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.25rem;
+    background-color: white;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 140px;
+    z-index: 100;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f3f4f6;
+  }
+
+  .dropdown-item:active {
+    background-color: #e5e7eb;
+  }
+
+  .dropdown-item-danger {
+    color: #dc2626;
+  }
+
+  .dropdown-item-danger:hover {
+    background-color: #fee2e2;
+  }
+
+  .dropdown-item svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Adjust card layout to prevent overlap */
+  td[data-label="Nombre"] {
+    padding-right: 3rem;
+  }
+}
+
+/* Desktop: Hide kebab menu, show edit/delete buttons */
+@media (min-width: 769px) {
+  .action-btn-mobile {
+    display: none !important;
+  }
+
+  .action-btn-desktop {
+    display: flex !important;
+  }
+
+  /* Hide mobile badge on desktop */
+  .mobile-badge {
+    display: none !important;
+  }
+}
+
+/* FAB button */
+.fab-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .fab-button {
+    display: flex;
+    position: fixed;
+    bottom: 90px;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 166, 81, 0.4);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 50;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .fab-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(0, 166, 81, 0.4);
+  }
+
+  .fab-button svg {
+    width: 24px;
+    height: 24px;
+  }
+}
