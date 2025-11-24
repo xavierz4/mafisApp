@@ -21,5 +21,21 @@ Sistema de Gestión de Mantenimiento (MVP).
 2. Instalar dependencias: `npm install`.
 3. Ejecutar: `npm run dev`.
 
+
+## Flujo de Trabajo (Git)
+
+- **Rama `main`**: Código estable.
+- **Rama `develop`**: Desarrollo activo.
+
+```bash
+# Para trabajar
+git checkout develop
+git pull origin develop
+# ... hacer cambios ...
+git add .
+git commit -m "Descripción"
+git push origin develop
+```
+
 ## Credenciales por defecto
-(Pendiente de implementar módulo de usuarios)
+- **Admin**: `admin@mafis.com` / `admin123`

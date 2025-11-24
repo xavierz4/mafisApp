@@ -4,6 +4,17 @@ Esta guía documenta paso a paso el proceso de construcción de la aplicación *
 
 ---
 
+## 0. Configuración Inicial y Git
+
+Antes de empezar, configuramos el entorno y el control de versiones.
+
+### Paso 0: Estructura y Git (`guia/00_Configuracion_Inicial.md`)
+- **Estructura**: Monolito Modular (Backend) + SPA (Frontend).
+- **Git**: Ramas `main` (estable) y `develop` (trabajo).
+- **Configuración**: `requirements.txt` (Flask) y `package.json` (React/Vite).
+
+---
+
 ## 1. Arquitectura y Diseño
 
 Antes de escribir código, definimos la estructura. Para este proyecto, elegimos arquitecturas que favorecen la organización y el mantenimiento a largo plazo.
