@@ -10,7 +10,7 @@ export default function ReportForm() {
   const [formData, setFormData] = useState({
     asset_id: '',
     description: '',
-    priority: 'MEDIUM'
+    priority: 'MEDIA'
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -95,10 +95,9 @@ export default function ReportForm() {
             onChange={handleChange}
             className="input"
           >
-            <option value="LOW">Baja - No afecta operación</option>
-            <option value="MEDIUM">Media - Afecta parcialmente</option>
-            <option value="HIGH">Alta - Detiene operación</option>
-            <option value="CRITICAL">Crítica - Riesgo de seguridad</option>
+            <option value="BAJA">Baja - No afecta operación</option>
+            <option value="MEDIA">Media - Afecta parcialmente</option>
+            <option value="ALTA">Alta - Detiene operación</option>
           </select>
         </div>
 

@@ -7,11 +7,11 @@ class Asset(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
-    type = db.Column(db.String(50), nullable=False) # EQUIPMENT, LOCATIVE, SERVICE
+    type = db.Column(db.String(50), nullable=False) # EQUIPO, LOCATIVO, SERVICIO
     location = db.Column(db.String(100), nullable=True)
     serial_number = db.Column(db.String(100), nullable=True)
-    status = db.Column(db.String(20), default='OPERATIONAL') # OPERATIONAL, DOWN, MAINTENANCE
-    criticality = db.Column(db.String(20), default='MEDIUM') # HIGH, MEDIUM, LOW
+    status = db.Column(db.String(20), default='OPERATIVO') # OPERATIVO, FUERA DE SERVICIO, EN MANTENIMIENTO
+    criticality = db.Column(db.String(20), default='MEDIA') # ALTA, MEDIA, BAJA
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

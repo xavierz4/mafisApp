@@ -8,13 +8,15 @@
   left: 0;
   bottom: 0;
   width: 280px;
-  background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
-  color: white;
+  background-color: #ffffff; /* Fondo Blanco */
+  color: #374151; /* Texto Gris Oscuro */
   display: flex;
   flex-direction: column;
   z-index: 30;
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
+  box-shadow: 4px 0 15px rgba(0,0,0,0.05); /* Sombra suave */
+  border-right: 1px solid #e5e7eb;
 }
 
 .dashboard-sidebar.open {
@@ -22,13 +24,38 @@
 }
 
 .dashboard-sidebar-header {
-  padding: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1.5rem;
+  height: 60px; /* Altura reducida y sutil */
+  /* Degradado corporativo: Azul a Verde */
+  background: linear-gradient(135deg, #005eb8 0%, #00a651 100%);
+  color: white;
+  border-bottom: none;
   font-size: 1.25rem;
   font-weight: 700;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  color: #6b7280; /* Gris suave */
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #fee2e2; /* Fondo rojo muy suave */
+  color: #ef4444; /* Texto rojo */
+  border-color: #fca5a5;
 }
 
 .sidebar-close-btn {
@@ -53,21 +80,21 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1.5rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: #4b5563; /* Gris medio para enlaces */
   text-decoration: none;
   transition: all 0.2s;
   font-weight: 500;
 }
 
 .dashboard-sidebar-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
+  background-color: #f3f4f6; /* Gris muy claro al pasar mouse */
+  color: #111827; /* Negro suave */
 }
 
 .dashboard-sidebar-link.active {
-  background-color: rgba(0, 166, 81, 0.2);
-  color: white;
-  border-left: 3px solid var(--primary-green);
+  background-color: rgba(0, 166, 81, 0.1); /* Verde muy suave */
+  color: var(--primary-green); /* Verde corporativo */
+  border-left: 4px solid var(--primary-green);
 }
 
 /* Desktop Sidebar */
@@ -84,6 +111,14 @@
 /* Mobile Sidebar */
 @media (max-width: 1024px) {
   .dashboard-sidebar {
-    display: none; /* Hidden on mobile, bottom nav used instead */
+    /* Don't hide display, use transform instead */
+    transform: translateX(-100%);
+    width: 80%; /* Slightly smaller on mobile */
+    max-width: 300px;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+  }
+  
+  .dashboard-sidebar.open {
+    transform: translateX(0);
   }
 }

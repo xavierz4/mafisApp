@@ -8,7 +8,7 @@ class WorkOrder(db.Model):
     report_id = db.Column(db.Integer, db.ForeignKey('reports.id'), nullable=False)
     technician_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     
-    status = db.Column(db.String(20), default='OPEN') # OPEN, ASSIGNED, IN_PROGRESS, COMPLETED, CLOSED
+    status = db.Column(db.String(20), default='ABIERTO') # ABIERTO, ASIGNADO, EN PROGRESO, COMPLETADO, CERRADO
     scheduled_date = db.Column(db.DateTime, nullable=True)
     completion_date = db.Column(db.DateTime, nullable=True)
     notes = db.Column(db.Text, nullable=True)

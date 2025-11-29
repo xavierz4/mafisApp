@@ -10,45 +10,46 @@ Sistema web progresivo (PWA) para la gestión de mantenimiento de activos fijos,
 
 ---
 
-## 🚀 Características
+## Características
 
 ### Backend
-- ✅ API REST con Flask
-- ✅ Autenticación JWT
-- ✅ SQLAlchemy ORM
-- ✅ MySQL como base de datos
-- ✅ CORS configurado
-- ✅ Rutas protegidas
+- API REST con Flask
+- Autenticación JWT
+- SQLAlchemy ORM
+- MySQL como base de datos
+- CORS configurado
+- Rutas protegidas
+- Notificaciones Web Push (VAPID)
 
 ### Frontend
-- ✅ React 18 con Vite
-- ✅ PWA (Progressive Web App)
-- ✅ Diseño responsive mobile-first
-- ✅ Bottom navigation para móvil
-- ✅ Gestión de estado con Zustand
-- ✅ CSS semántico moderno
-- ✅ Búsqueda en tiempo real
+- React 18 con Vite
+- PWA (Progressive Web App)
+- Diseño responsive mobile-first
+- Bottom navigation para móvil
+- Gestión de estado con Zustand
+- CSS semántico moderno
+- Búsqueda en tiempo real
 
 ### UI/UX
-- ✅ Diseño moderno con branding SENA
-- ✅ Tablas que se convierten en tarjetas en móvil
-- ✅ Menú kebab para acciones en móvil
-- ✅ FAB (Floating Action Button)
-- ✅ Optimizado para touch targets
-- ✅ Sin scroll horizontal en móvil
+- Diseño moderno con branding SENA
+- Tablas que se convierten en tarjetas en móvil
+- Menú contextual para acciones en móvil
+- FAB (Floating Action Button)
+- Optimizado para pantallas táctiles
+- Sin scroll horizontal en móvil
 
 ---
 
-## 📋 Requisitos Previos
+## Requisitos Previos
 
-- **Python 3.8+** → [Descargar](https://www.python.org/downloads/)
-- **Node.js 18+** → [Descargar](https://nodejs.org/)
-- **MySQL 8.0+** → [Descargar](https://dev.mysql.com/downloads/installer/)
-- **Git** → [Descargar](https://git-scm.com/downloads)
+- **Python 3.8+**
+- **Node.js 18+**
+- **MySQL 8.0+**
+- **Git**
 
 ---
 
-## 🛠️ Instalación
+## Instalación
 
 ### 1. Clonar el repositorio
 ```bash
@@ -66,7 +67,7 @@ python -m venv venv
 
 # Activar entorno virtual
 # Windows:
-.\\venv\\Scripts\\activate
+.\venv\Scripts\activate
 # Mac/Linux:
 source venv/bin/activate
 
@@ -74,20 +75,15 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Configurar variables de entorno
-# Crear archivo .env con:
-FLASK_APP=run.py
-FLASK_ENV=development
-SECRET_KEY=tu-secret-key-aqui
-JWT_SECRET_KEY=tu-jwt-secret-key-aqui
-SQLALCHEMY_DATABASE_URI=mysql+pymysql://root:@localhost/mafis_mvp_db
-CORS_ORIGINS=http://localhost:5173
+# Copiar el archivo de ejemplo y renombrarlo a .env
+cp .env.example .env
+# Editar .env con tus credenciales reales (DB, JWT, VAPID, etc.)
 
-# Crear base de datos
-# En MySQL:
-CREATE DATABASE mafis_mvp_db;
+# Inicializar base de datos
+flask db upgrade
 
-# Inicializar tablas
-python init_tables.py
+# Poblar datos de prueba (opcional)
+python seed_users.py
 ```
 
 ### 3. Configurar Frontend
@@ -101,12 +97,12 @@ npm install
 
 ---
 
-## 🚀 Ejecución
+## Ejecución
 
 ### Terminal 1 - Backend:
 ```bash
 cd backend
-.\\venv\\Scripts\\activate
+.\venv\Scripts\activate
 python run.py
 ```
 El backend estará disponible en: `http://localhost:5000`
@@ -120,38 +116,32 @@ El frontend estará disponible en: `http://localhost:5173`
 
 ---
 
-## 🔐 Credenciales por Defecto
+## Credenciales por Defecto
 
 - **Email:** admin@mafis.com
 - **Password:** admin123
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 MAFIS_MVP/
 ├── backend/                # API REST (Flask)
 │   ├── app/
-│   │   ├── modules/        # Módulos (auth, assets, reports)
-│   │   │   ├── auth/
-│   │   │   ├── assets/
-│   │   │   └── reports/
+│   │   ├── modules/        # Módulos (auth, assets, reports, push)
 │   │   ├── common/         # Utilidades compartidas
 │   │   ├── config.py       # Configuración
 │   │   └── extensions.py   # Extensiones Flask
+│   ├── migrations/         # Migraciones de base de datos
 │   ├── run.py              # Entry point
-│   ├── init_tables.py      # Inicialización DB
+│   ├── seed_users.py       # Datos de prueba
 │   └── requirements.txt    # Dependencias Python
 │
 ├── frontend/               # SPA (React + Vite)
 │   ├── src/
 │   │   ├── components/     # Componentes reutilizables
-│   │   │   └── layout/     # Layout components
 │   │   ├── features/       # Módulos por funcionalidad
-│   │   │   ├── auth/       # Autenticación
-│   │   │   ├── assets/     # Gestión de activos
-│   │   │   └── reports/    # Gestión de reportes
 │   │   ├── lib/            # Configuraciones (axios)
 │   │   ├── App.jsx         # Componente principal
 │   │   ├── main.jsx        # Entry point
@@ -159,20 +149,21 @@ MAFIS_MVP/
 │   ├── package.json        # Dependencias Node
 │   └── vite.config.js      # Configuración Vite
 │
-└── README.md               # Este archivo
+└── README.md               # Documentación
 ```
 
 ---
 
-## 🎨 Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 ### Backend
 - **Flask 3.0** - Framework web
 - **Flask-SQLAlchemy** - ORM
+- **Flask-Migrate** - Migraciones de base de datos
 - **Flask-JWT-Extended** - Autenticación JWT
 - **Flask-CORS** - Manejo de CORS
 - **PyMySQL** - Conector MySQL
-- **Python-dotenv** - Variables de entorno
+- **PyWebPush** - Notificaciones Push
 
 ### Frontend
 - **React 18** - Librería UI
@@ -186,111 +177,32 @@ MAFIS_MVP/
 
 ---
 
-## 📱 Características Responsive
-
-### Desktop (>1024px)
-- Sidebar de navegación
-- Tablas completas
-- Iconos de acción directos
-
-### Mobile (≤1024px)
-- Bottom navigation bar
-- Tarjetas en lugar de tablas
-- Menú kebab para acciones
-- FAB para crear elementos
-- Barra de búsqueda optimizada
-
----
-
-## 🔧 API Endpoints
+## API Endpoints Principales
 
 ### Autenticación
 - `POST /api/auth/register` - Registro de usuario
 - `POST /api/auth/login` - Inicio de sesión
-- `GET /api/auth/me` - Usuario actual (requiere token)
+- `GET /api/auth/me` - Usuario actual
 
 ### Activos
 - `GET /api/assets` - Listar activos
-- `GET /api/assets/:id` - Obtener activo
 - `POST /api/assets` - Crear activo
-- `PUT /api/assets/:id` - Actualizar activo
-- `DELETE /api/assets/:id` - Eliminar activo
 
 ### Reportes
 - `GET /api/reports` - Listar reportes
-- `GET /api/reports/:id` - Obtener reporte
 - `POST /api/reports` - Crear reporte
-- `PUT /api/reports/:id` - Actualizar reporte
-- `DELETE /api/reports/:id` - Eliminar reporte
+
+### Notificaciones
+- `GET /api/push/vapid-public-key` - Obtener clave pública
+- `POST /api/push/subscribe` - Suscribir dispositivo
 
 ---
 
-## 🎨 Sistema de Diseño
-
-### Colores Principales
-- **Azul SENA:** `#0066CC`
-- **Verde SENA:** `#00A651`
-- **Texto Principal:** `#1f2937`
-- **Texto Secundario:** `#6b7280`
-
-### Componentes
-- Badges de estado (success, danger, warning)
-- Botones primarios y secundarios
-- Inputs con validación
-- Tarjetas modernas
-- Menús dropdown
-
----
-
-## 🐛 Troubleshooting
-
-### Error: "Subject must be a string"
-**Solución:** Asegúrate de convertir el user.id a string en JWT:
-```python
-access_token = create_access_token(identity=str(user.id))
-```
-
-### Error: CORS
-**Solución:** Verifica el proxy en `vite.config.js`:
-```javascript
-proxy: {
-  '/api': {
-    target: 'http://localhost:5000',
-    changeOrigin: true,
-  }
-}
-```
-
-### Error: Base de datos no existe
-**Solución:**
-```sql
-CREATE DATABASE mafis_mvp_db;
-```
-Luego ejecuta: `python init_tables.py`
-
----
-
-## 📝 Licencia
+## Licencia
 
 Este proyecto es parte del material educativo del SENA.
 
 ---
 
-## 👥 Contribuir
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
----
-
-## 📧 Contacto
-
-**SENA - Servicio Nacional de Aprendizaje**
-
----
-
-**Versión:** 2.0  
-**Última actualización:** 24 de Noviembre, 2025
+**Versión:** 2.0
+**Última actualización:** Noviembre 2025

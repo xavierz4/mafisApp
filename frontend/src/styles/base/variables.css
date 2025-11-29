@@ -1,38 +1,83 @@
 /* ============================================
-   VARIABLES CSS - MAFIS MVP
-   Colores, espaciado y configuración global
+   VARIABLES CSS - MAFIS MVP (REFACTORIZADO)
+   Sistema de Diseño Coherente y Accesible
    ============================================ */
 
 :root {
-  /* SENA Brand Colors */
-  --primary-blue: #0066CC;
-  --primary-green: #00A651;
-  --sena-600: #00A651;
-  --sena-700: #008f45;
-  --sena-500: #00c25e;
-  
-  /* Neutral Colors */
-  --bg-page: #f3f4f6;
+  /* --- BRAND COLORS (SENA) --- */
+  /* Blue Scale */
+  --primary-50: #e6f0fa;
+  --primary-100: #cce0f5;
+  --primary-500: #0066CC; /* Main Brand Blue */
+  --primary-600: #0052a3; /* Hover */
+  --primary-700: #003d7a; /* Active */
+
+  /* Green Scale */
+  --secondary-50: #e6f6ec;
+  --secondary-100: #ccecd9;
+  --secondary-500: #00A651; /* Original SENA Green restored */
+  --secondary-600: #008f45;
+  --secondary-700: #007a3b;
+
+  /* --- SEMANTIC COLORS --- */
+  /* Success (Based on Green) */
+  --success-bg: #dcfce7;
+  --success-text: #166534;
+  --success-border: #86efac;
+
+  /* Warning */
+  --warning-bg: #fef9c3;
+  --warning-text: #854d0e;
+  --warning-border: #fde047;
+
+  /* Danger */
+  --danger-bg: #fee2e2;
+  --danger-text: #991b1b;
+  --danger-border: #fca5a5;
+
+  /* Info */
+  --info-bg: #e0f2fe;
+  --info-text: #075985;
+  --info-border: #7dd3fc;
+
+  /* --- NEUTRALS & TEXT --- */
+  --bg-page: #f8fafc; /* Cool gray for cleaner look */
   --bg-card: #ffffff;
-  --text-main: #1f2937;
-  --text-muted: #6b7280;
-  --border-color: #e5e7eb;
   
-  /* Spacing */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
+  --text-main: #111827; /* Almost black, softer */
+  --text-secondary: #4b5563; /* Readable gray */
+  --text-muted: #9ca3af; /* Disabled/Placeholder only */
   
-  /* Border Radius */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-full: 9999px;
+  --border-light: #f3f4f6;
+  --border-medium: #e5e7eb;
+  --border-dark: #d1d5db;
+
+  /* --- SPACING SYSTEM (8pt grid) --- */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
   
-  /* Shadows */
+  /* --- BORDER RADIUS --- */
+  --radius-sm: 0.375rem; /* 6px */
+  --radius-md: 0.5rem;   /* 8px */
+  --radius-lg: 0.75rem;  /* 12px */
+  --radius-xl: 1rem;     /* 16px */
+  
+  /* --- SHADOWS (Soft & Premium) --- */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 0 0 1px rgba(0,0,0,0.03), 0 2px 8px rgba(0,0,0,0.04); /* Modern card border */
+
+  /* --- COMPATIBILITY (Mapping old vars to new system) --- */
+  --primary-blue: var(--primary-500);
+  --primary-green: var(--secondary-500);
+  --border-color: var(--border-medium);
+  
+  /* Main Action Colors */
+  --primary-color: var(--secondary-500); /* Green as primary brand color */
+  --primary-hover: var(--secondary-600);
 }

@@ -14,6 +14,11 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     is_active = db.Column(db.Boolean, default=True)
 
+    # Notification Preferences
+    notify_email = db.Column(db.Boolean, default=True)
+    notify_whatsapp = db.Column(db.Boolean, default=True)
+    notify_push = db.Column(db.Boolean, default=True)
+
     def set_password(self, password):
         salt = bcrypt.gensalt()
         self.password_hash = bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
@@ -28,5 +33,10 @@ class User(db.Model):
             'name': self.name,
             'role': self.role,
             'phone': self.phone,
-            'is_active': self.is_active
+            'is_active': self.is_active,
+            'preferences': {
+                'email': self.notify_email,
+                'whatsapp': self.notify_whatsapp,
+                'push': self.notify_push
+            }
         }

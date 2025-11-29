@@ -11,10 +11,10 @@ export default function AssetForm() {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    type: 'EQUIPMENT',
+    type: 'EQUIPO',
     location: '',
-    status: 'OPERATIONAL',
-    criticality: 'MEDIUM'
+    status: 'OPERATIVO',
+    criticality: 'MEDIA'
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -106,9 +106,9 @@ export default function AssetForm() {
               onChange={handleChange}
               className="input"
             >
-              <option value="EQUIPMENT">Equipo</option>
-              <option value="LOCATIVE">Locativo</option>
-              <option value="SERVICE">Servicio</option>
+              <option value="EQUIPO">Equipo</option>
+              <option value="LOCATIVO">Locativo</option>
+              <option value="SERVICIO">Servicio</option>
             </select>
           </div>
 
@@ -118,6 +118,7 @@ export default function AssetForm() {
               type="text"
               name="location"
               id="location"
+              required
               value={formData.location}
               onChange={handleChange}
               className="input"
@@ -133,9 +134,9 @@ export default function AssetForm() {
               onChange={handleChange}
               className="input"
             >
-              <option value="OPERATIONAL">Operativo</option>
-              <option value="DOWN">Fuera de Servicio</option>
-              <option value="MAINTENANCE">En Mantenimiento</option>
+              <option value="OPERATIVO">Operativo</option>
+              <option value="FUERA DE SERVICIO">Fuera de Servicio</option>
+              <option value="EN MANTENIMIENTO">En Mantenimiento</option>
             </select>
           </div>
 
@@ -148,9 +149,9 @@ export default function AssetForm() {
               onChange={handleChange}
               className="input"
             >
-              <option value="LOW">Baja</option>
-              <option value="MEDIUM">Media</option>
-              <option value="HIGH">Alta</option>
+              <option value="BAJA">Baja</option>
+              <option value="MEDIA">Media</option>
+              <option value="ALTA">Alta</option>
             </select>
           </div>
         </div>

@@ -1,6 +1,4 @@
-/* ============================================
-   DASHBOARD LAYOUT
-   ============================================ */
+/* Dashboard Layout Styles */
 
 .dashboard-layout {
   display: flex;
@@ -10,55 +8,99 @@
 
 .dashboard-main {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.dashboard-topbar {
-  background-color: white;
-  border-bottom: 1px solid var(--border-color);
-  padding: 1rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.mobile-menu-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-main);
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dashboard-content {
-  flex: 1;
-  padding: 2rem;
-  overflow-y: auto;
+  min-width: 0; /* Prevent flex overflow */
+  padding-bottom: 80px; /* Space for bottom nav on mobile */
 }
 
 /* Desktop Layout */
 @media (min-width: 1025px) {
   .dashboard-main {
-    margin-left: 280px;
-  }
-
-  .mobile-menu-btn {
-    display: none;
+    margin-left: 280px; /* Match sidebar width */
+    padding-bottom: 0;
   }
 }
 
-/* Mobile Layout */
-@media (max-width: 1024px) {
-  .dashboard-content {
-    padding: 1rem;
-    padding-bottom: 90px; /* Space for bottom nav */
+.dashboard-content {
+  padding: 1.5rem;
+}
+
+.dashboard-topbar {
+  height: 64px;
+  background-color: white;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .charts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Stat Card Specifics */
+.stat-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.btn-link {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+.hover-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hover-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.text-primary { color: var(--primary-color); }
+.text-danger { color: #dc2626; }
+.text-warning { color: #d97706; }
+.text-success { color: #16a34a; }
+.text-muted { color: var(--text-muted); }

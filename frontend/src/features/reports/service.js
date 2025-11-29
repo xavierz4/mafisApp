@@ -15,6 +15,16 @@ export const createReport = async (reportData) => {
   return response.data;
 };
 
+export const updateReport = async (id, data) => {
+  const response = await api.put(`/reports/${id}`, data);
+  return response.data;
+};
+
+export const deleteReport = async (id) => {
+  const response = await api.delete(`/reports/${id}`);
+  return response.data;
+};
+
 export const updateReportStatus = async (id, status) => {
   const response = await api.put(`/reports/${id}/status`, { status });
   return response.data;

@@ -8,16 +8,18 @@ import AssetsList from './features/assets/AssetsList';
 import AssetForm from './features/assets/AssetForm';
 import ReportsList from './features/reports/ReportsList';
 import ReportForm from './features/reports/ReportForm';
+import WorkOrdersList from './features/work_orders/WorkOrdersList';
+import UsersList from './features/users/UsersList';
+import UserForm from './features/users/UserForm';
+import DiagnosticPage from './features/users/DiagnosticPage';
+import SettingsPage from './features/settings/SettingsPage';
 import useAuthStore from './features/auth/store';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, token } = useAuthStore();
-  console.log('[ProtectedRoute] isAuthenticated:', isAuthenticated);
-  console.log('[ProtectedRoute] token:', token ? token.substring(0, 20) + '...' : 'null');
+  const { isAuthenticated } = useAuthStore();
   
   if (!isAuthenticated) {
-    console.log('[ProtectedRoute] NOT authenticated, redirecting to login');
     return <Navigate to="/login" replace />;
   }
   return children;
@@ -36,13 +38,17 @@ function App() {
           </ProtectedRoute>
         }>
           <Route index element={<DashboardHome />} />
-          {/* Add other routes here later */}
           <Route path="assets" element={<AssetsList />} />
           <Route path="assets/new" element={<AssetForm />} />
           <Route path="assets/:id/edit" element={<AssetForm />} />
           <Route path="reports" element={<ReportsList />} />
           <Route path="reports/new" element={<ReportForm />} />
-          <Route path="work-orders" element={<div>Órdenes (Próximamente)</div>} />
+          <Route path="work-orders" element={<WorkOrdersList />} />
+          <Route path="users" element={<UsersList />} />
+          <Route path="users/new" element={<UserForm />} />
+          <Route path="users/:id/edit" element={<UserForm />} />
+          <Route path="diagnostic" element={<DiagnosticPage />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
 
         <Route path="/" element={<Navigate to="/dashboard" replace />} />

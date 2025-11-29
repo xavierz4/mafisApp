@@ -9,13 +9,19 @@ auth_bp = Blueprint('auth', __name__)
 def register():
     data = request.get_json()
     
+    # Validate required fields
+    required_fields = ['email', 'password', 'name']
+    missing = [f for f in required_fields if not data.get(f)]
+    if missing:
+        return jsonify({'message': f'Missing required fields: {", ".join(missing)}'}), 400
+    
     if User.query.filter_by(email=data.get('email')).first():
         return jsonify({'message': 'Email already registered'}), 400
         
     new_user = User(
         email=data.get('email'),
         name=data.get('name'),
-        role=data.get('role', 'requester'),
+        role='requester',  # Force requester role for public registration
         phone=data.get('phone')
     )
     new_user.set_password(data.get('password'))
@@ -28,16 +34,23 @@ def register():
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
+    
+    # Validate required fields
+    if not data.get('email') or not data.get('password'):
+        return jsonify({'message': 'Email and password are required'}), 400
+    
     user = User.query.filter_by(email=data.get('email')).first()
     
-    if user and user.check_password(data.get('password')):
-        access_token = create_access_token(identity=str(user.id))  # Convert to string
+    # Check user exists, password is correct, and account is active
+    if user and user.is_active and user.check_password(data.get('password')):
+        access_token = create_access_token(identity=str(user.id))
         return jsonify({
             'access_token': access_token,
             'user': user.to_dict()
         }), 200
-        
-    return jsonify({'message': 'Invalid credentials'}), 401
+    
+    # Generic error message to avoid user enumeration
+    return jsonify({'message': 'Invalid credentials or account disabled'}), 401
 
 @auth_bp.route('/me', methods=['GET'])
 @jwt_required()

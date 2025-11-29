@@ -1,66 +1,79 @@
 /* ============================================
-   BOTTOM NAVIGATION (Mobile PWA)
+   BOTTOM NAVIGATION (MOBILE)
    ============================================ */
 
 .bottom-nav {
   display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 70px;
-  background: linear-gradient(90deg, var(--primary-blue) 0%, var(--primary-green) 100%);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  padding: 0;
 }
 
 @media (max-width: 1024px) {
   .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* Brand Gradient using Variables */
+    background: linear-gradient(135deg, var(--primary-500) 0%, var(--secondary-500) 100%);
+    border-top: none;
+    padding: 0.5rem 0;
+    padding-bottom: env(safe-area-inset-bottom);
     display: flex;
-    align-items: center;
     justify-content: space-around;
+    align-items: center;
+    z-index: 40;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
   }
-}
 
-.bottom-nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  padding: 0.5rem;
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  font-size: 0.75rem;
-  font-weight: 500;
-  transition: all 0.2s;
-  flex: 1;
-  min-width: 60px;
-  position: relative;
-}
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    min-width: 60px;
+    color: #FFFFFF !important; /* Force Pure White */
+    opacity: 0.9; /* High visibility for inactive */
+    text-decoration: none;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border-radius: 8px;
+  }
 
-.bottom-nav-item:active {
-  background-color: rgba(255, 255, 255, 0.1);
-}
+  .bottom-nav-item:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 1;
+  }
 
-.bottom-nav-item.active {
-  color: white;
-}
+  .bottom-nav-item.active {
+    color: #FFFFFF !important;
+    opacity: 1;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
 
-.bottom-nav-item.active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 3px;
-  background-color: white;
-  border-radius: 0 0 3px 3px;
-}
+  .bottom-nav-item.active .bottom-nav-icon {
+    color: #FFFFFF !important;
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  }
 
-.bottom-nav-icon {
-  width: 24px;
-  height: 24px;
+  .bottom-nav-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s;
+    stroke: #FFFFFF !important;
+    stroke-width: 1.5px;
+    color: #FFFFFF !important;
+    fill: none; /* Ensure icons are outlined */
+  }
+
+  .bottom-nav-item.active .bottom-nav-icon {
+    transform: scale(1.1);
+  }
+
+  .bottom-nav-item span {
+    white-space: nowrap;
+  }
 }

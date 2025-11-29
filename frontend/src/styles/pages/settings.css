@@ -1,0 +1,213 @@
+/* Settings Page Styles */
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.settings-header {
+  margin-bottom: 1rem;
+}
+
+.settings-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.settings-subtitle {
+  color: var(--text-muted);
+}
+
+.settings-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.settings-section-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.settings-section-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.settings-section-title svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--text-muted);
+}
+
+.settings-row {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.settings-icon-wrapper {
+  padding: 0.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-icon-wrapper.email { background-color: #dbeafe; }
+.settings-icon-wrapper.email svg { color: #2563eb; }
+
+.settings-icon-wrapper.whatsapp { background-color: #dcfce7; }
+.settings-icon-wrapper.whatsapp svg { color: #16a34a; }
+
+.settings-icon-wrapper.push { background-color: #f3e8ff; }
+.settings-icon-wrapper.push svg { color: #9333ea; }
+
+.settings-icon-wrapper svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.settings-label {
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+.settings-description {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Toggle Switch */
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  width: 3rem; /* Increased width slightly */
+  height: 1.6rem; /* Increased height slightly */
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition-property: background-color;
+  transition-duration: 200ms;
+  background-color: #e5e7eb;
+  padding: 2px; /* Add padding to contain thumb */
+  display: flex; /* Use flex to align thumb */
+  align-items: center;
+}
+
+.toggle-switch.active {
+  background-color: var(--primary-color);
+}
+
+.toggle-switch:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggle-thumb {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition-property: transform;
+  transition-duration: 200ms;
+  transform: translateX(0); /* Start at 0 */
+}
+
+.toggle-switch.active .toggle-thumb {
+  transform: translateX(1.4rem); /* Adjust translation to fit new width */
+}
+
+/* Push Status Box */
+.push-status-box {
+  margin-top: 1rem;
+  background-color: #f9fafb;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  padding: 1rem;
+}
+
+.push-status-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.push-status-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.push-status-text svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.text-success { color: var(--success-color); }
+.text-warning { color: var(--warning-color); }
+.text-error { color: var(--danger-color); }
+
+.btn-push {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-push.activate {
+  background-color: #9333ea;
+  color: white;
+}
+
+.btn-push.activate:hover {
+  background-color: #7e22ce;
+}
+
+.btn-push.deactivate {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-push.deactivate:hover {
+  background-color: #fecaca;
+}
+
+.push-note {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}

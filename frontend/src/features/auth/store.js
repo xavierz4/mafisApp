@@ -1,8 +1,20 @@
 import { create } from 'zustand';
-import { login as loginApi, register as registerApi } from './service';
+import { login as loginApi, register as registerApi, getMe } from './service';
+
+// Safe JSON parsing helper
+const getUserFromStorage = () => {
+  try {
+    const userData = localStorage.getItem('user');
+    return userData ? JSON.parse(userData) : null;
+  } catch (error) {
+    console.error('Failed to parse user data from localStorage:', error);
+    localStorage.removeItem('user'); // Clean up corrupted data
+    return null;
+  }
+};
 
 const useAuthStore = create((set) => ({
-  user: JSON.parse(localStorage.getItem('user')) || null,
+  user: getUserFromStorage(),
   token: localStorage.getItem('token') || null,
   isAuthenticated: !!localStorage.getItem('token'),
   isLoading: false,
@@ -41,6 +53,18 @@ const useAuthStore = create((set) => ({
         error: error.response?.data?.message || 'Error al registrarse', 
         isLoading: false 
       });
+      return false;
+    }
+  },
+
+  checkAuth: async () => {
+    try {
+      const user = await getMe();
+      localStorage.setItem('user', JSON.stringify(user));
+      set({ user });
+      return true;
+    } catch (error) {
+      console.error('Failed to fetch user profile:', error);
       return false;
     }
   },

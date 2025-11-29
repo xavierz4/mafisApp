@@ -21,16 +21,32 @@ wheels/
 *.egg
 MANIFEST
 .env
+.env.local
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+**/lib/
+!frontend/src/lib/
+/guia/
+/material_educativo/
+
+
+# Flask
+instance/
+.webassets-cache
+
+# Database
+*.sqlite3
+*.sqlite
+*.db
 
 # Node
 node_modules/
 dist/
+dev-dist/
 build/
 .npm
 .eslintcache
@@ -41,6 +57,7 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # OS
 .DS_Store
@@ -51,6 +68,10 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# Documentation (not for public repo)
-guia/
+

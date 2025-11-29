@@ -67,10 +67,10 @@ export default function AssetsList() {
     asset.type.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  if (isLoading) return <div>Cargando activos...</div>;
+  if (isLoading) return <div className="text-center py-8">Cargando activos...</div>;
 
   return (
-    <div>
+    <div className="page-container">
       <div className="page-header">
         <div>
           <h1 className="page-title">Activos</h1>
@@ -82,109 +82,73 @@ export default function AssetsList() {
           to="/dashboard/assets/new"
           className="btn btn-primary"
         >
-          <PlusIcon className="icon-sm" style={{ marginRight: '0.5rem' }} />
+          <PlusIcon style={{ width: '20px', height: '20px' }} />
           Nuevo Activo
         </Link>
       </div>
 
-      {/* Search bar for mobile */}
-      <div className="search-bar">
-        <MagnifyingGlassIcon className="search-icon" />
-        <input
-          type="text"
-          placeholder="Buscar activo, ubicación o tipo..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
+      <div className="card">
+        <div className="card-header" style={{ borderBottom: 'none', paddingBottom: 0 }}>
+          <div className="search-bar" style={{ maxWidth: '400px', width: '100%', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem', border: '1px solid var(--border-color)', borderRadius: '0.375rem' }}>
+            <MagnifyingGlassIcon style={{ width: '20px', color: 'var(--text-muted)' }} />
+            <input
+              type="text"
+              placeholder="Buscar activo, ubicación o tipo..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ border: 'none', outline: 'none', width: '100%' }}
+            />
+          </div>
+        </div>
 
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Tipo</th>
-              <th>Ubicación</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredAssets.map((asset) => (
-              <tr key={asset.id}>
-                <td data-label="Nombre" className="font-bold">
-                  {asset.name}
-                  {/* Badge only visible on mobile */}
-                  <span data-label="Estado" className="mobile-badge">
-                    <span className={`badge ${
-                      asset.status === 'OPERATIONAL' ? 'badge-success' : 'badge-danger'
-                    }`}>
-                      {asset.status}
-                    </span>
-                  </span>
-                </td>
-                <td data-label="Tipo">{asset.type}</td>
-                <td data-label="Ubicación">{asset.location}</td>
-                <td data-label="Estado">
-                  <span className={`badge ${
-                    asset.status === 'OPERATIONAL' ? 'badge-success' : 'badge-danger'
-                  }`}>
-                    {asset.status}
-                  </span>
-                </td>
-                <td data-label="Acciones">
-                  <div className="actions-cell">
-                    {/* Desktop: Edit and Delete buttons */}
-                    <Link to={`/dashboard/assets/${asset.id}/edit`} className="action-btn action-btn-desktop text-primary">
-                      <PencilIcon className="icon-sm" />
-                    </Link>
-                    <button onClick={() => handleDelete(asset.id)} className="action-btn action-btn-desktop text-danger">
-                      <TrashIcon className="icon-sm" />
-                    </button>
-                    
-                    {/* Mobile: Kebab menu with dropdown */}
-                    <div className="kebab-menu-container action-btn-mobile">
-                      <button 
-                        className="action-btn kebab-menu"
-                        onClick={(e) => toggleMenu(asset.id, e)}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="icon-sm">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                        </svg>
-                      </button>
-                      
-                      {/* Dropdown menu */}
-                      {openMenuId === asset.id && (
-                        <div className="dropdown-menu">
-                          <button 
-                            className="dropdown-item"
-                            onClick={() => handleEdit(asset.id)}
-                          >
-                            <PencilIcon className="icon-sm" />
-                            Editar
-                          </button>
-                          <button 
-                            className="dropdown-item dropdown-item-danger"
-                            onClick={() => handleDelete(asset.id)}
-                          >
-                            <TrashIcon className="icon-sm" />
-                            Eliminar
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </td>
+        <div className="table-container">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
+                <th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredAssets.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-8 text-muted">
+                    No se encontraron activos.
+                  </td>
+                </tr>
+              ) : (
+                filteredAssets.map((asset) => (
+                  <tr key={asset.id}>
+                    <td className="font-bold">{asset.name}</td>
+                    <td>{asset.type}</td>
+                    <td>{asset.location}</td>
+                    <td>
+                      <span className={`badge ${
+                        asset.status === 'OPERATIONAL' ? 'badge-success' : 'badge-danger'
+                      }`}>
+                        {asset.status}
+                      </span>
+                    </td>
+                    <td>
+                      <div className="flex gap-2">
+                        <Link to={`/dashboard/assets/${asset.id}/edit`} className="text-primary hover:text-primary-dark" title="Editar">
+                          <PencilIcon style={{ width: '20px' }} />
+                        </Link>
+                        <button onClick={() => handleDelete(asset.id)} className="text-danger hover:text-danger-dark" title="Eliminar">
+                          <TrashIcon style={{ width: '20px' }} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-
-      {/* FAB for mobile */}
-      <Link to="/dashboard/assets/new" className="fab-button">
-        <PlusIcon />
-      </Link>
     </div>
   );
 }

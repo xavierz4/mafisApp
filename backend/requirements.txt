@@ -3,6 +3,7 @@ Flask-SQLAlchemy
 Flask-Migrate
 Flask-Cors
 Flask-JWT-Extended
+Flask-Mail
 python-dotenv
 PyMySQL
 cryptography
@@ -10,3 +11,6 @@ pydantic
 email-validator
 gunicorn
 bcrypt
+flask-socketio
+twilio
+pywebpush

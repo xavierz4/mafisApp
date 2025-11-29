@@ -1,6 +1,7 @@
 from app.extensions import db
 from datetime import datetime
 
+
 class Report(db.Model):
     __tablename__ = 'reports'
 
@@ -9,8 +10,8 @@ class Report(db.Model):
     requester_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     description = db.Column(db.Text, nullable=False)
-    priority = db.Column(db.String(20), default='MEDIUM') # HIGH, MEDIUM, LOW
-    status = db.Column(db.String(20), default='PENDING') # PENDING, IN_PROGRESS, RESOLVED, CANCELLED
+    priority = db.Column(db.String(20), default='MEDIA') # ALTA, MEDIA, BAJA
+    status = db.Column(db.String(20), default='ABIERTO') # ABIERTO, EN PROGRESO, RESUELTO, CERRADO
     evidence_url = db.Column(db.String(255), nullable=True)
     
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
