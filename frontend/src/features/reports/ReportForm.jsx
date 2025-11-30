@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { createReport } from './service';
+import { useNavigate, useParams } from 'react-router-dom';
+import { createReport, getReport, updateReport } from './service';
 import { getAssets } from '../assets/service';
 import toast from 'react-hot-toast';
 
 export default function ReportForm() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const isEditMode = !!id;
+  
   const [assets, setAssets] = useState([]);
   const [formData, setFormData] = useState({
     asset_id: '',
@@ -16,17 +19,38 @@ export default function ReportForm() {
 
   useEffect(() => {
     loadAssets();
-  }, []);
+    if (isEditMode) {
+      loadReportData();
+    }
+  }, [id]);
 
   const loadAssets = async () => {
     try {
       const data = await getAssets();
       setAssets(data);
-      if (data.length > 0) {
+      // Only set default asset if NOT in edit mode
+      if (!isEditMode && data.length > 0) {
         setFormData(prev => ({ ...prev, asset_id: data[0].id }));
       }
     } catch (error) {
       toast.error('Error al cargar activos');
+    }
+  };
+
+  const loadReportData = async () => {
+    try {
+      setIsLoading(true);
+      const data = await getReport(id);
+      setFormData({
+        asset_id: data.asset_id,
+        description: data.description,
+        priority: data.priority
+      });
+    } catch (error) {
+      toast.error('Error al cargar el reporte');
+      navigate('/dashboard/reports');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,11 +62,16 @@ export default function ReportForm() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await createReport(formData);
-      toast.success('Reporte creado exitosamente');
+      if (isEditMode) {
+        await updateReport(id, formData);
+        toast.success('Reporte actualizado exitosamente');
+      } else {
+        await createReport(formData);
+        toast.success('Reporte creado exitosamente');
+      }
       navigate('/dashboard/reports');
     } catch (error) {
-      toast.error('Error al crear el reporte');
+      toast.error(isEditMode ? 'Error al actualizar reporte' : 'Error al crear reporte');
     } finally {
       setIsLoading(false);
     }
@@ -50,7 +79,9 @@ export default function ReportForm() {
 
   return (
     <div className="asset-form-container">
-      <h1 className="asset-form-header">Nuevo Reporte de Falla</h1>
+      <h1 className="asset-form-header">
+        {isEditMode ? 'Editar Reporte de Falla' : 'Nuevo Reporte de Falla'}
+      </h1>
       
       <form onSubmit={handleSubmit} className="asset-form-card">
         <div className="asset-form-group">
@@ -62,6 +93,7 @@ export default function ReportForm() {
             value={formData.asset_id}
             onChange={handleChange}
             className="input"
+            disabled={isEditMode} // Usually you don't change the asset of a report
           >
             <option value="">Seleccione un activo</option>
             {assets.map(asset => (
@@ -114,7 +146,7 @@ export default function ReportForm() {
             disabled={isLoading}
             className="btn btn-primary"
           >
-            {isLoading ? 'Enviando...' : 'Enviar Reporte'}
+            {isLoading ? 'Guardando...' : (isEditMode ? 'Actualizar Reporte' : 'Enviar Reporte')}
           </button>
         </div>
       </form>

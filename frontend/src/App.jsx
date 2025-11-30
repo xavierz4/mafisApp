@@ -43,6 +43,7 @@ function App() {
           <Route path="assets/:id/edit" element={<AssetForm />} />
           <Route path="reports" element={<ReportsList />} />
           <Route path="reports/new" element={<ReportForm />} />
+          <Route path="reports/:id/edit" element={<ReportForm />} />
           <Route path="work-orders" element={<WorkOrdersList />} />
           <Route path="users" element={<UsersList />} />
           <Route path="users/new" element={<UserForm />} />

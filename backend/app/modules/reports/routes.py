@@ -79,8 +79,13 @@ def update_report(id):
 @reports_bp.route('/<int:id>', methods=['DELETE'])
 @jwt_required()
 def delete_report(id):
-    services.delete_report(id)
-    return jsonify({'message': 'Report deleted'}), 200
+    try:
+        services.delete_report(id)
+        return jsonify({'message': 'Report deleted'}), 200
+    except ValueError as e:
+        return jsonify({'message': str(e)}), 400
+    except Exception as e:
+        return jsonify({'message': f'Error deleting report: {str(e)}'}), 500
 
 @reports_bp.route('/<int:id>/status', methods=['PATCH'])
 @jwt_required()

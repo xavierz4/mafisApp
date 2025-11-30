@@ -47,7 +47,8 @@ export default function ReportsList() {
         toast.success('Reporte eliminado');
         loadReports();
       } catch (error) {
-        toast.error('Error al eliminar reporte');
+        const message = error.response?.data?.message || 'Error al eliminar reporte';
+        toast.error(message);
       }
     }
   };

@@ -13,7 +13,10 @@ export const useNotifications = () => {
   useEffect(() => {
     if (!user) return;
 
-    const socket = io(SOCKET_URL);
+    const socket = io(SOCKET_URL, {
+      transports: ['polling', 'websocket'],
+      withCredentials: true
+    });
 
     socket.on('connect', () => {
       console.log('Connected to notification server');
