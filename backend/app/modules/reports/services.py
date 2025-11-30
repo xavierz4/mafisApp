@@ -74,6 +74,14 @@ def update_report(report_id, data):
 
 def delete_report(report_id):
     report = Report.query.get_or_404(report_id)
+    
+    # Check if report has an associated work order explicitly
+    from app.modules.work_orders.models import WorkOrder
+    existing_wo = WorkOrder.query.filter_by(report_id=report_id).first()
+    
+    if existing_wo:
+        raise ValueError("No se puede eliminar el reporte porque tiene una Orden de Trabajo asociada.")
+        
     db.session.delete(report)
     db.session.commit()
     return True
