@@ -209,6 +209,7 @@ def assign_technician(id):
 def update_status(id):
     order = WorkOrder.query.get_or_404(id)
     data = request.get_json()
+    print(f"DEBUG: update_status called for id {id} with data {data}")
     
     # Get current user
     current_user_id = int(get_jwt_identity())
@@ -234,7 +235,8 @@ def update_status(id):
         # Also update report status
         if order.report:
             order.report.status = 'RESUELTO'
-                
-        db.session.commit()
+    
+    print(f"DEBUG: Committing status change to {new_status}")
+    db.session.commit()
         
     return jsonify(order.to_dict()), 200

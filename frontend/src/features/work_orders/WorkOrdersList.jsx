@@ -29,7 +29,8 @@ export default function WorkOrdersList() {
       toast.success(`Orden actualizada a ${newStatus}`);
       loadOrders();
     } catch (error) {
-      toast.error('Error al actualizar orden');
+      const message = error.response?.data?.message || 'Error al actualizar orden';
+      toast.error(message);
     }
   };
 
