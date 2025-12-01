@@ -5,7 +5,8 @@ import {
   ClipboardDocumentListIcon, 
   ExclamationTriangleIcon,
   CheckCircleIcon,
-  ClockIcon
+  ClockIcon,
+  CubeIcon
 } from '@heroicons/react/24/outline';
 import useAuthStore from '../auth/store';
 import { getReports } from '../reports/service';
@@ -121,22 +122,45 @@ export default function DashboardHome() {
 
         <div className="dashboard-grid">
           <div className="card card-body">
-            <div className="stat-label">Reportes Abiertos</div>
-            <div className="stat-value text-danger">{stats.openReports}</div>
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <div className="stat-label">Reportes Abiertos</div>
+                <div className="stat-value text-danger">{stats.openReports}</div>
+              </div>
+              <div style={{ backgroundColor: '#fee2e2', padding: '12px', borderRadius: '50%' }}>
+                <ExclamationTriangleIcon className="text-danger" style={{ width: '24px', height: '24px' }} />
+              </div>
+            </div>
             <Link to="/dashboard/reports" className="btn-link">
               Ver todos →
             </Link>
           </div>
+
           <div className="card card-body">
-            <div className="stat-label">Órdenes en Progreso</div>
-            <div className="stat-value text-warning">{stats.inProgressOrders}</div>
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <div className="stat-label">Órdenes en Progreso</div>
+                <div className="stat-value text-warning">{stats.inProgressOrders}</div>
+              </div>
+              <div style={{ backgroundColor: '#fef3c7', padding: '12px', borderRadius: '50%' }}>
+                <WrenchScrewdriverIcon className="text-warning" style={{ width: '24px', height: '24px' }} />
+              </div>
+            </div>
             <Link to="/dashboard/work-orders" className="btn-link">
               Gestionar →
             </Link>
           </div>
+
           <div className="card card-body">
-            <div className="stat-label">Activos Totales</div>
-            <div className="stat-value text-primary">{stats.totalAssets}</div>
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <div className="stat-label">Activos Totales</div>
+                <div className="stat-value text-primary">{stats.totalAssets}</div>
+              </div>
+              <div style={{ backgroundColor: '#dbeafe', padding: '12px', borderRadius: '50%' }}>
+                <CubeIcon className="text-primary" style={{ width: '24px', height: '24px' }} />
+              </div>
+            </div>
             <Link to="/dashboard/assets" className="btn-link">
               Ver inventario →
             </Link>
@@ -206,30 +230,42 @@ export default function DashboardHome() {
 
         <div className="dashboard-grid">
           <div className="card card-body">
-            <div className="flex items-center gap-2 mb-2">
-              <ClockIcon className="icon-sm text-warning" style={{ width: '24px' }} />
-              <div className="stat-label">Mis Órdenes Pendientes</div>
-            </div>
-            <div className="stat-value text-warning">
-              {myRecentOrders.filter(o => o.status === 'ASIGNADO').length}
-            </div>
-          </div>
-          <div className="card card-body">
-            <div className="flex items-center gap-2 mb-2">
-              <WrenchScrewdriverIcon className="icon-sm text-primary" style={{ width: '24px' }} />
-              <div className="stat-label">En Progreso</div>
-            </div>
-            <div className="stat-value text-primary">
-              {myRecentOrders.filter(o => o.status === 'EN PROGRESO').length}
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <div className="stat-label">Mis Órdenes Pendientes</div>
+                <div className="stat-value text-warning">
+                  {myRecentOrders.filter(o => o.status === 'ASIGNADO').length}
+                </div>
+              </div>
+              <div style={{ backgroundColor: '#fef3c7', padding: '12px', borderRadius: '50%' }}>
+                <ClockIcon className="text-warning" style={{ width: '24px', height: '24px' }} />
+              </div>
             </div>
           </div>
           <div className="card card-body">
-            <div className="flex items-center gap-2 mb-2">
-              <CheckCircleIcon className="icon-sm text-success" style={{ width: '24px' }} />
-              <div className="stat-label">Completadas Hoy</div>
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <div className="stat-label">En Progreso</div>
+                <div className="stat-value text-primary">
+                  {myRecentOrders.filter(o => o.status === 'EN PROGRESO').length}
+                </div>
+              </div>
+              <div style={{ backgroundColor: '#dbeafe', padding: '12px', borderRadius: '50%' }}>
+                <WrenchScrewdriverIcon className="text-primary" style={{ width: '24px', height: '24px' }} />
+              </div>
             </div>
-            <div className="stat-value text-success">
-              {myRecentOrders.filter(o => o.status === 'COMPLETADO').length}
+          </div>
+          <div className="card card-body">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <div className="stat-label">Completadas Hoy</div>
+                <div className="stat-value text-success">
+                  {myRecentOrders.filter(o => o.status === 'COMPLETADO').length}
+                </div>
+              </div>
+              <div style={{ backgroundColor: '#dcfce7', padding: '12px', borderRadius: '50%' }}>
+                <CheckCircleIcon className="text-success" style={{ width: '24px', height: '24px' }} />
+              </div>
             </div>
           </div>
         </div>
@@ -288,26 +324,38 @@ export default function DashboardHome() {
 
       <div className="dashboard-grid">
         <div className="card card-body">
-          <div className="flex items-center gap-2 mb-2">
-            <ClipboardDocumentListIcon className="icon-sm text-primary" style={{ width: '24px' }} />
-            <div className="stat-label">Mis Reportes</div>
+          <div className="flex justify-between items-start mb-2">
+            <div>
+              <div className="stat-label">Mis Reportes</div>
+              <div className="stat-value text-primary">{stats.totalReports}</div>
+            </div>
+            <div style={{ backgroundColor: '#dbeafe', padding: '12px', borderRadius: '50%' }}>
+              <ClipboardDocumentListIcon className="text-primary" style={{ width: '24px', height: '24px' }} />
+            </div>
           </div>
-          <div className="stat-value text-primary">{stats.totalReports}</div>
         </div>
         <div className="card card-body">
-          <div className="flex items-center gap-2 mb-2">
-            <ExclamationTriangleIcon className="icon-sm text-danger" style={{ width: '24px' }} />
-            <div className="stat-label">Pendientes</div>
+          <div className="flex justify-between items-start mb-2">
+            <div>
+              <div className="stat-label">Pendientes</div>
+              <div className="stat-value text-danger">{stats.openReports}</div>
+            </div>
+            <div style={{ backgroundColor: '#fee2e2', padding: '12px', borderRadius: '50%' }}>
+              <ExclamationTriangleIcon className="text-danger" style={{ width: '24px', height: '24px' }} />
+            </div>
           </div>
-          <div className="stat-value text-danger">{stats.openReports}</div>
         </div>
         <div className="card card-body">
-          <div className="flex items-center gap-2 mb-2">
-            <CheckCircleIcon className="icon-sm text-success" style={{ width: '24px' }} />
-            <div className="stat-label">Resueltos</div>
-          </div>
-          <div className="stat-value text-success">
-            {stats.totalReports - stats.openReports}
+          <div className="flex justify-between items-start mb-2">
+            <div>
+              <div className="stat-label">Resueltos</div>
+              <div className="stat-value text-success">
+                {stats.totalReports - stats.openReports}
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#dcfce7', padding: '12px', borderRadius: '50%' }}>
+              <CheckCircleIcon className="text-success" style={{ width: '24px', height: '24px' }} />
+            </div>
           </div>
         </div>
       </div>
